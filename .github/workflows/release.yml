@@ -28,6 +28,24 @@ jobs:
       - name: Build with Maven
         run: mvn -B clean package --file pom.xml
 
+      - name: Get version and hash
+        id: info
+        run: |
+          VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+          HASH=$(git rev-parse --short HEAD)
+          echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
+          echo "hash=${HASH}" >> "$GITHUB_OUTPUT"
+          echo "artifact=qqmsgsync-${VERSION}-${HASH}" >> "$GITHUB_OUTPUT"
+
+      - name: Rename artifact
+        run: mv target/qqmsgsync-*.jar target/${{ steps.info.outputs.artifact }}.jar
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.info.outputs.artifact }}
+          path: target/${{ steps.info.outputs.artifact }}.jar
+
       - name: Get tag version
         if: startsWith(github.ref, 'refs/tags/')
         id: tag
@@ -38,5 +56,5 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           name: ${{ steps.tag.outputs.version }}
-          files: target/*.jar
+          files: target/${{ steps.info.outputs.artifact }}.jar
           generate_release_notes: true

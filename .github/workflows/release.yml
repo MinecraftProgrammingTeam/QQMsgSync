@@ -43,7 +43,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ steps.info.outputs.artifact }}
+          name: ${{ steps.info.outputs.artifact }}.jar
           path: target/${{ steps.info.outputs.artifact }}.jar
 
       - name: Get tag version

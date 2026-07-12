@@ -6,7 +6,7 @@
 
     <groupId>com.netessx</groupId>
     <artifactId>qqmsgsync</artifactId>
-    <version>0.11-SNAPSHOT</version>
+    <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>qqmsgsync</name>

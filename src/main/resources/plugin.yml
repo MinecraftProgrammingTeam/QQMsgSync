@@ -1,0 +1,9 @@
+name: QQMsgSync
+description: $description
+version: '${version}'
+
+main: com.netessx.qqmsgsync.QQMsgSync
+api-version: '1.21'
+
+authors: [ Gingmzmzx ]
+website: https://spigot.netessx.com

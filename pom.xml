@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.netessx</groupId>
+    <artifactId>qqmsgsync</artifactId>
+    <version>0.11-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <name>qqmsgsync</name>
+
+    <properties>
+        <java.version>21</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <build>
+        <defaultGoal>clean package</defaultGoal>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.13.0</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.5.3</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <filters>
+                        <filter>
+                            <artifact>*:*</artifact>
+                            <excludes>
+                                <exclude>META-INF/*.SF</exclude>
+                                <exclude>META-INF/*.DSA</exclude>
+                                <exclude>META-INF/*.RSA</exclude>
+                                <exclude>META-INF/LICENSE*</exclude>
+                                <exclude>META-INF/NOTICE*</exclude>
+                            </excludes>
+                        </filter>
+                    </filters>
+                </configuration>
+            </plugin>
+        </plugins>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+    </build>
+
+    <repositories>
+        <repository>
+            <id>spigotmc-repo</id>
+            <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.spigotmc</groupId>
+            <artifactId>spigot-api</artifactId>
+            <version>1.21.11-R0.1-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba.fastjson2</groupId>
+            <artifactId>fastjson2</artifactId>
+            <version>2.0.61</version>
+        </dependency>
+        <!-- https://repo1.maven.org/maven2/io/github/kloping/bot-qqpd-java/ -->
+        <dependency>
+            <groupId>io.github.kloping</groupId>
+            <artifactId>bot-qqpd-java</artifactId>
+            <version>1.5.3-R4</version>
+        </dependency>
+        <dependency>
+            <groupId>com.mchange</groupId> <!-- Replace with vulnerable Group ID -->
+            <artifactId>c3p0</artifactId> <!-- Replace with vulnerable Artifact ID -->
+            <version>0.12.0</version> <!-- Replace with the fixed/secure version -->
+        </dependency>
+        <dependency>
+            <groupId>com.mchange</groupId> <!-- Replace with vulnerable Group ID -->
+            <artifactId>mchange-commons-java</artifactId> <!-- Replace with vulnerable Artifact ID -->
+            <version>0.4.0</version> <!-- Replace with the fixed/secure version -->
+        </dependency>
+        <dependency>
+            <groupId>org.bouncycastle</groupId> <!-- Replace with vulnerable Group ID -->
+            <artifactId>bcprov-jdk18on</artifactId> <!-- Replace with vulnerable Artifact ID -->
+            <version>1.84</version> <!-- Replace with the fixed/secure version -->
+        </dependency>
+        <dependency>
+            <groupId>org.bouncycastle</groupId> <!-- Replace with vulnerable Group ID -->
+            <artifactId>bcpkix-jdk18on</artifactId> <!-- Replace with vulnerable Artifact ID -->
+            <version>1.84</version> <!-- Replace with the fixed/secure version -->
+        </dependency>
+    </dependencies>
+</project>
